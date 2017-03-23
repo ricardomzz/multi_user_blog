@@ -1,0 +1,12 @@
+import handlers.postlist
+import handlers.comment
+import handlers.deletecomment
+import handlers.deletepost
+import handlers.editcomment
+import handlers.editpost
+import handlers.like
+import handlers.login
+import handlers.logout
+import handlers.newpost
+import handlers.postlist
+import handlers.signup

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col-xs-12">
+    <form action="{{ action }}" method="Post">
+
+    Username: <input type='text' name="username" value={% if username %}{{ username }}{% endif %}>
+
+  </div>
+  <div class="col-xs-12">
+    Password: <input type='password' name="password">
+  </div>
+  <div class="col-xs-12">
+    <input type="submit" value= "submit">
+  </div>
+  <div class="col-xs-12">
+    <p>{{ message }}</p>
+  </div>
+  <div class="col-xs-12">
+    {% if action == "login"%}
+    <a href="/signup">Sign Up</a>
+    {% endif%}
+    {% if action == "signup"%}
+    <a href="/login">login</a>
+  </div>
+</div>
+
+{% endif%}
+{% endblock %}

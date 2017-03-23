@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% if username %}
+<div class="col-xs-12">
+  <h4>Hello, {{ username }}!</h4>
+</div>
+<div class="col-xs-2">
+  <a href="/newpost"><h4>New Post</h4></a>
+</div>
+
+<div class="col-xs-2">
+  <a href="/logout"><h4>Logout</h4></a>
+</div>
+{% else %}
+<div class="col-xs-2">
+  <a href="/login"><h4>Login</h4></a>
+</div>
+{% endif %}
+
+
+  {% for post in posts%}
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>{{ post.title }}</h3>
+    </div>
+    <div class="col-xs-12">
+      <h6>by <span class="username">{{ post.author.username }}</span></h6>
+    </div>
+    <div class="col-xs-12">
+      <p>{{ post.content }}</p>
+    </div>
+    <div class="col-xs-12">
+      <p>Likes:{{ post.count_likes }}</p>
+      {% if post.author.username != username %}
+      <a href="/like/{{ post.url }}">Like</a>
+      {% endif %}
+      <a href="/comment/{{ post.url }}">Comment</a>
+
+      {% if post.author.username == username %}
+      <a href="/editpost/{{ post.url }}">Edit</a>
+      <a href="/deletepost/{{ post.url }}">Delete</a>
+      {% endif %}
+    </div>
+  </div>
+
+    {% for comment in post.comments | sort(attribute='created', reverse=True) %}
+
+    <div class="col-xs-11 col-xs-offset-1">
+      <p><span class="username">{{ comment.author.username }}</span>: {{ comment.content }}</p>
+      {% if comment.author.username == username %}
+      <a href="/editcomment/{{ comment.url }}">Edit</a>
+      <a href="/deletecomment/{{ comment.url }}">Delete</a>
+      {% endif %}
+
+    </div>
+    {% endfor %}
+
+
+  {% endfor %}
+
+
+
+{% endblock %}

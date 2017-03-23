@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class = "row">
+
+<div class="col-xs-12">
+  {% if comment %}
+  <form action="/editcomment/{{ comment.url }}" method="Post">
+  {% else %}
+  <form action="/comment/{{ post.url }}" method="Post">
+  {% endif %}
+  <p>Content:</p>
+</div>
+<div class="col-xs-12">
+   <textarea name="content" rows="10" cols="50">
+  {% if comment %}
+    {{comment.content }}
+  {% endif %}
+  </textarea>
+    <input type="hidden" name="post_url" value= "{{ post.url }}"><br>
+</div>
+
+
+
+
+
+<div class="col-xs-2">
+  <input type="submit" value= "Submit"><br>
+</div>
+</form>
+<div class="col-xs-2">
+<form action="/">
+  <input type="submit" value="cancel">
+</form>
+</div>
+
+</div>
+
+
+{% endblock %}
